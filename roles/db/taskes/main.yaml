@@ -16,11 +16,11 @@
         - cryptography
       excuitable: pip3.9
 
-
+      
 - name: checking the root password is settedup or not 
   community.mysql.mysql_db:
-    login_user: root
-    login_password: {{mysql_root_password}}
+    login_user: root 
+    login_password: "{{mysql_root_password}}"
     filter: version
   ignore_errors: yes 
   register: mysql_pass_check
@@ -30,7 +30,7 @@
     msg: "info is {{mysql_pass_check}}"
 
 - name: settingup root passwprd if it is not settedup
-  ansible.builtin.command: mysql_secure_installation --set-root-pass {{mysql_root_password}}
+  ansible.builtin.command: mysql_secure_installation --set-root-pass "{{mysql_root_password}}"
   when: mysql_pass_check.failed is true 
 
     
