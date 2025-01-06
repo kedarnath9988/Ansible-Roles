@@ -14,7 +14,7 @@
       name: 
         - PyMySql
         - cryptography
-      executable: pip3.90
+      executable: pip3.9
       
 
 - name: checking the root password is settedup or not 
