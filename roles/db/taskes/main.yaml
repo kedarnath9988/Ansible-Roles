@@ -1,0 +1,36 @@
+- name: install mysql-server 
+  ansible.builtin.dnf:
+    name: mysql-server
+    state: present
+
+- name: start and enable the mysql servver 
+  ansible.builtin.service:
+    name: mysql-server
+    state: started
+    enabled: yes 
+  
+- name: install the python dependences
+  ansible.builtin.pip:  
+    - name: 
+        - PyMySql
+        - cryptography
+      excuitable: pip3.9
+
+
+- name: checking the root password is settedup or not 
+  community.mysql.mysql_db:
+    login_user: root
+    login_password: {{mysql_root_password}}
+    filter: version
+  ignore_errors: yes 
+  register: mysql_pass_check
+
+- name: mysql mysql_pass_check info 
+  ansible.builtin.debug:
+    msg: "info is {{mysql_pass_check}}"
+
+- name: settingup root passwprd if it is not settedup
+  ansible.builtin.command: mysql_secure_installation --set-root-pass {{mysql_root_password}}
+  when: mysql_pass_check.failed is true 
+
+    
