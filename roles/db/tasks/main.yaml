@@ -11,16 +11,16 @@
   
 - name: install the python dependences
   ansible.builtin.pip:  
-    - name: 
+      name: 
         - PyMySql
         - cryptography
-      excuitable: pip3.9
+      excuitable: pip3.90
 
-      
 - name: checking the root password is settedup or not 
   community.mysql.mysql_db:
     login_user: root 
     login_password: "{{mysql_root_password}}"
+    login_host: "{{login_host}}"
     filter: version
   ignore_errors: yes 
   register: mysql_pass_check
