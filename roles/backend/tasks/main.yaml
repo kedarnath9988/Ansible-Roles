@@ -1,0 +1,14 @@
+- name: disable nodule nodejs:18 
+  ansible.builtin.dnf: module disable nodejs
+
+- name: enable the nodejs:20 here 
+  ansible.builtin.dnf: module enable nodejs:20 
+
+- nmae: install the nodejs 
+  ansible.builtin.dnf:
+    name: nodejs
+    state: present
+
+- name: add the user 
+  ansib
+    
